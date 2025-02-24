@@ -7,6 +7,19 @@
         .wrong-question { color: black; }
         .correct-answer { color: red; }
         .wrong-answer { text-decoration: line-through; } /* 新增删除线样式 */
+        /* 修改密码框样式 */
+        input[type="password"] { 
+            padding: 10px;
+            width: 200px;
+            height: 30px;
+            font-size: 16px;
+        }
+        /* 新增制作信息样式 */
+        .credit {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
         /* 其他样式保持不变 */
         .container { max-width: 800px; margin: 20px auto; padding: 20px; }
         .password-box { text-align: center; margin: 50px 0; }
@@ -21,6 +34,7 @@
 <body>
     <div class="container">
         <div id="passwordScreen" class="password-box">
+            <div class="credit">由Mr Li制作</div>
             <h3>请输入访问密码：</h3>
             <input type="password" id="passwordInput">
             <button onclick="checkPassword()">进入</button>
