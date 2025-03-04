@@ -2,74 +2,96 @@
 <html>
 <head>
     <title>机械试题练习</title>
-   <style>
-        /* 新增样式 */
+    <style>
+        /* 新增分数显示样式 */
+        .score {
+            font-size: 28px;
+            color: #4CAF50;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        /* 新增结果页布局样式 */
+        .result-container {
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        /* 其他保持原有样式 */
+        .timer { position: fixed; top: 20px; right: 20px; font-size: 24px; font-weight: bold; color: #ff4757; background: rgba(255, 255, 255, 0.9); padding: 10px 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .input-group { margin: 15px 0; }
+        .input-group h3 { margin: 10px 0; color: #333; font-size: 18px; }
+        .input-field { width: 250px; padding: 12px; margin: 5px 0; border: 2px solid #ddd; border-radius: 4px; font-size: 16px; transition: border-color 0.3s; }
+        .input-field:focus { border-color: #4CAF50; outline: none; }
         .wrong-question { color: black; }
         .correct-answer { color: red; }
-        .wrong-answer { text-decoration: line-through; } /* 新增删除线样式 */
-        /* 修改密码框样式 */
-        input[type="password"] { 
-            padding: 10px;
-            width: 200px;
-            height: 30px;
-            font-size: 16px;
-        }
-        /* 新增制作信息样式 */
-        .credit {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 15px;
-        }
-        /* 其他样式保持不变 */
+        .wrong-answer { text-decoration: line-through; }
+        .credit { font-size: 20px; color: red; margin-bottom: 25px; }
         .container { max-width: 800px; margin: 20px auto; padding: 20px; }
-        .password-box { text-align: center; margin: 50px 0; }
+        .password-box, .result-screen { text-align: center; margin: 50px 0; }
         .question { margin: 20px 0; border: 1px solid #ccc; padding: 15px; }
         .options { margin: 10px 0; }
         .result { color: red; margin: 20px 0; }
-        button { padding: 8px 20px; margin: 10px 0; }
-        input[type="password"] { padding: 5px; }
+        .action-btn { padding: 12px 30px; margin: 20px 0; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; transition: background 0.3s; }
+        .action-btn:hover { background: #45a049; }
+        .back-btn { background: #2196F3; }
     </style>
-
 </head>
 <body>
     <div class="container">
+        <!-- 密码输入页 -->
         <div id="passwordScreen" class="password-box">
             <div class="credit">由Mr Li制作</div>
-            <h3>请输入访问密码：</h3>
-            <input type="password" id="passwordInput">
-            <button onclick="checkPassword()">进入</button>
+            <div class="input-group">
+                <h3>请输入您的姓名：</h3>
+                <input type="text" id="nameInput" class="input-field" placeholder="姓名">
+            </div>
+            <div class="input-group">
+                <h3>请输入访问密码：</h3>
+                <input type="password" id="passwordInput" class="input-field" placeholder="密码">
+            </div>
+            <button class="action-btn" onclick="checkPassword()">进入系统</button>
         </div>
         
+        <!-- 答题页 -->
         <div id="quizScreen" style="display: none;">
+            <div id="timer" class="timer">05:00</div>
             <div id="questions"></div>
-            <button onclick="submitQuiz()">提交答案</button>
-            <div id="result" class="result"></div>
+            <button class="action-btn" onclick="submitQuiz()">提交答案</button>
+        </div>
+
+        <!-- 结果展示页 -->
+        <div id="resultScreen" class="result-screen" style="display: none;">
+            <button class="action-btn back-btn" onclick="location.reload()">返回首页</button>
+            <div id="finalResult"></div>
         </div>
     </div>
 
     <script>
         const questions = [
-             {
-            question: "铸铁中平均含碳量一般为",
-            options: ["A: 0.2%", "B: 0.7%", "C: 1.5%", "D: >2.11%"],
-            correct: "D"
-        },
-        {
-            "question": "牌号HT200表示的材料是",
-            "options": ["A: 碳钢", "B: 合金钢", "C: 铸铁", "D: 黄铜"],
-            "correct": "C"
-        },
-        {
-            "question": "被连接件的孔都不切制螺纹的螺纹联接是",
-            "options": ["A: 螺栓联接", "B: 双头螺柱联接", "C: 螺钉联接", "D: 紧定螺钉联接"],
-            "correct": "A"
-        },
-        {
-            "question": "非螺纹密封管螺纹的牙型角为",
-            "options": ["A: 0°", "B: 30°", "C: 55°", "D: 60°"],
-            "correct": "C"
-        },
-        {
+            {
+                question: "铸铁中平均含碳量一般为",
+                options: ["A: 0.2%", "B: 0.7%", "C: 1.5%", "D: >2.11%"],
+                correct: "D"
+            },
+            {
+                question: "牌号HT200表示的材料是",
+                options: ["A: 碳钢", "B: 合金钢", "C: 铸铁", "D: 黄铜"],
+                correct: "C"
+            },
+            {
+                question: "被连接件的孔都不切制螺纹的螺纹联接是",
+                options: ["A: 螺栓联接", "B: 双头螺柱联接", "C: 螺钉联接", "D: 紧定螺钉联接"],
+                correct: "A"
+            },
+            {
+                question: "非螺纹密封管螺纹的牙型角为",
+                options: ["A: 0°", "B: 30°", "C: 55°", "D: 60°"],
+                correct: "C"
+            },
+{
             "question": "在带传动中带的弹性滑动",
             "options": ["A: 在张紧力足够时可以避免", "B: 在传动功率较小时可以避免", "C: 在小带轮包角足够大时可以避免", "D: 不可避免"],
             "correct": "D"
@@ -948,24 +970,43 @@
 
         let selectedQuestions = [];
         let userAnswers = {};
+        let userName = '';
+        let countdownTimer;
 
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
+            userName = document.getElementById('nameInput').value || "匿名用户";
+            
             if (password === '2025') {
                 document.getElementById('passwordScreen').style.display = 'none';
                 document.getElementById('quizScreen').style.display = 'block';
                 initializeQuiz();
+                startTimer(5);
             } else {
                 alert('密码错误！');
             }
         }
 
+        function startTimer(minutes) {
+            let time = minutes * 60;
+            countdownTimer = setInterval(() => {
+                const minutesLeft = Math.floor(time / 60);
+                const secondsLeft = time % 60;
+                document.getElementById('timer').textContent = 
+                    `${String(minutesLeft).padStart(2, '0')}:${String(secondsLeft).padStart(2, '0')}`;
+                
+                if (time <= 0) {
+                    clearInterval(countdownTimer);
+                    submitQuiz();
+                }
+                time--;
+            }, 1000);
+        }
+
         function initializeQuiz() {
-            // 随机选择20道不重复的题目
             const shuffled = questions.sort(() => 0.5 - Math.random());
             selectedQuestions = shuffled.slice(0, 20);
             
-            // 生成题目界面
             let html = '';
             selectedQuestions.forEach((q, index) => {
                 html += `<div class="question">
@@ -981,47 +1022,54 @@
             });
             document.getElementById('questions').innerHTML = html;
         }
- function submitQuiz() {
-            // 收集答案（保持不变）
+
+        function submitQuiz() {
+            clearInterval(countdownTimer);
             userAnswers = {};
             selectedQuestions.forEach((q, index) => {
                 const selected = document.querySelector(`input[name="q${index}"]:checked`);
                 userAnswers[index] = selected ? selected.value : '';
             });
 
-            // 统计结果（修改部分）
             let correct = 0;
-            let wrong = 0;
             let wrongDetails = [];
             
             selectedQuestions.forEach((q, index) => {
                 if (userAnswers[index] === q.correct) {
                     correct++;
                 } else {
-                    wrong++;
                     wrongDetails.push({
                         number: index + 1,
                         question: q.question,
                         options: q.options,
                         correct: q.correct,
-                        userAnswer: userAnswers[index] // 记录用户答案
+                        userAnswer: userAnswers[index]
                     });
                 }
             });
 
-            // 显示结果（修改部分）
-            let resultHtml = `<h3>正确：${correct}题，错误：${wrong}题</h3>`;
-            if (wrong > 0) {
-                resultHtml += `<h4>错误题目：</h4>`;
+            // 新增分数计算
+            const totalQuestions = 20;
+            const scorePerQuestion = 5;
+            const totalScore = correct * scorePerQuestion;
+
+            // 构建结果页内容
+            let resultHtml = `<h2 style="color:#2196F3">考生姓名：${userName}</h2>`;
+            resultHtml += `<div class="score">得分：${totalScore}分</div>`;
+            resultHtml += `<h3>正确：${correct}题 / 总计：${totalQuestions}题</h3>`;
+            
+            // 将详细结果放入可滚动区域
+            resultHtml += `<div class="result-container">`;
+            if (wrongDetails.length > 0) {
+                resultHtml += `<h4>错题解析：</h4>`;
                 wrongDetails.forEach(item => {
                     resultHtml += `
                         <div class="wrong-question">
                             <p>${item.number}. ${item.question}</p>
                             <div class="options">`;
                     
-                    // 遍历所有选项
                     item.options.forEach(option => {
-                        const optionKey = option[0]; // 获取选项字母
+                        const optionKey = option[0];
                         const isCorrect = optionKey === item.correct;
                         const isWrongSelected = optionKey === item.userAnswer && !isCorrect;
                         
@@ -1038,10 +1086,15 @@
                     resultHtml += `</div></div><hr>`;
                 });
             }
-            document.getElementById('result').innerHTML = resultHtml;
+            resultHtml += `</div>`; // 结束可滚动区域
+
+            document.getElementById('quizScreen').style.display = 'none';
+            document.getElementById('resultScreen').style.display = 'block';
+            document.getElementById('finalResult').innerHTML = resultHtml;
+
+            // 自动滚动到顶部
+            window.scrollTo(0, 0);
         }
-
-
     </script>
 </body>
 </html>
