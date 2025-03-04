@@ -3,7 +3,6 @@
 <head>
     <title>机械试题练习</title>
     <style>
-        /* 修改倒计时样式 */
         .timer {
             position: fixed;
             top: 20px;
@@ -18,7 +17,6 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             z-index: 1000;
         }
-        /* 其他保持原有样式 */
         .score { font-size: 28px; color: #4CAF50; margin: 20px 0; font-weight: bold; }
         .result-container { max-height: 80vh; overflow-y: auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; margin-top: 20px; }
         .input-group { margin: 15px 0; }
@@ -41,7 +39,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- 密码输入页 -->
         <div id="passwordScreen" class="password-box">
             <div class="credit">由高州一职 Mr Li制作</div>
             <div class="input-group">
@@ -55,14 +52,12 @@
             <button class="action-btn" onclick="checkPassword()">进入系统</button>
         </div>
         
-        <!-- 答题页 -->
         <div id="quizScreen" style="display: none;">
             <div id="timer" class="timer">05:00</div>
             <div id="questions"></div>
             <button class="action-btn" onclick="submitQuiz()">提交答案</button>
         </div>
 
-        <!-- 结果展示页 -->
         <div id="resultScreen" class="result-screen" style="display: none;">
             <button class="action-btn back-btn" onclick="location.reload()">返回首页</button>
             <div id="finalResult"></div>
@@ -70,6 +65,18 @@
     </div>
 
     <script>
+        // 学生名单（新增）
+        const studentList = [
+            "邱日强", "黄火明", "杨名驰", "朱立乾", "邱耀铭", "葛金鹏", "梁皓轩",
+            "郭恩瑞", "程剑豪", "罗远昊", "江柏冠", "卢宝增", "邓镇权", "黄庆飞",
+            "谢金志", "冯麟斌", "卢子豪", "张超城", "黄析俊", "黄永霖", "李鼎",
+            "邓鸿镇", "黄培轩", "彭家乐", "黄新铧", "谢国永", "曾俊烽", "杨永建",
+            "陈继贤", "刘金灿", "袁乐清", "朱冠帆", "张广隆", "梁国亮", "梁燕辰",
+            "陈江南", "林浩宇", "蔡伟杰", "林松海", "吕仁才", "韦悦", "石江涛",
+            "宁颢然", "刘付煜毅", "梁志鑫", "赖兆霆", "张梓钥", "冯子强", "陈家庆",
+            "陈锡基", "苏子聪"
+        ];
+
         const questions = [
             {
                 question: "铸铁中平均含碳量一般为",
@@ -974,17 +981,28 @@
         let countdownTimer;
 
         function checkPassword() {
+            const inputName = document.getElementById('nameInput').value.trim();
             const password = document.getElementById('passwordInput').value;
-            userName = document.getElementById('nameInput').value || "匿名用户";
             
-            if (password === '2426') {
-                document.getElementById('passwordScreen').style.display = 'none';
-                document.getElementById('quizScreen').style.display = 'block';
-                initializeQuiz();
-                startTimer(5);
-            } else {
-                alert('密码错误！');
+            // 新增双重验证（学生姓名+密码）
+            const isValidStudent = studentList.some(name => 
+                name.toLowerCase() === inputName.toLowerCase()
+            );
+            
+            if (!isValidStudent) {
+                alert('错误：姓名不在学生名单中！');
+                return;
             }
+            if (password !== '2426') {
+                alert('错误：密码不正确！');
+                return;
+            }
+
+            userName = inputName || "匿名用户";
+            document.getElementById('passwordScreen').style.display = 'none';
+            document.getElementById('quizScreen').style.display = 'block';
+            initializeQuiz();
+            startTimer(5);
         }
 
         function startTimer(minutes) {
