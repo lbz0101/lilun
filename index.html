@@ -2,22 +2,70 @@
 <html>
 <head>
     <title>钳工证理论历年真题（机械基础部分）</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
-        /* 首页字体扩大2倍 */
-        .credit { font-size: 40px !important; }
-        .input-group h3 { font-size: 36px !important; }
-        .name-select, .input-field { font-size: 32px !important; }
-        .action-btn { font-size: 32px !important; }
-
-        /* 全局调整 */
-        body { font-size: 60px; } /* 答题页和答案页基础字体 */
-
+        body { 
+            font-size: 60px;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .credit { 
+            font-size: 40px !important;
+            color: red;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .input-group {
+            margin: 40px 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            gap: 20px;
+        }
+        .input-group h3 {
+            font-size: 36px !important;
+            margin: 20px 0;
+            color: #333;
+        }
+        .name-select, .input-field {
+            width: 800px;
+            padding: 30px;
+            border: 4px solid #ddd;
+            border-radius: 4px;
+            font-size: 32px !important;
+            transition: border-color 0.3s;
+        }
+        .action-btn {
+            font-size: 32px !important;
+            padding: 30px 60px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
         .timer {
             position: fixed;
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 48px !important; /* 计时器放大 */
+            font-size: 48px !important;
             font-weight: bold;
             color: #ff4757;
             background: rgba(255, 255, 255, 0.9);
@@ -26,11 +74,14 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             z-index: 1000;
         }
-
-        /* 单选按钮样式 */
+        .question {
+            padding: 40px;
+            margin: 40px 0;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
         input[type="radio"] {
             -webkit-appearance: none;
-            -moz-appearance: none;
             appearance: none;
             width: 60px;
             height: 60px;
@@ -41,64 +92,68 @@
             position: relative;
             top: -5px;
         }
-
         input[type="radio"]:checked {
             background: #4CAF50;
             border-color: #4CAF50;
         }
-
-        /* 问题选项排版 */
-        .question p { font-size: 60px !important; }
-        .options label { font-size: 60px !important; }
-        .result-container * { font-size: 60px !important; }
-        .score { font-size: 84px !important; }
-
-        /* 原有样式调整 */
-        .container { max-width: 1200px; }
-        .input-field, .name-select {
-            width: 800px;
-            padding: 30px;
-            border-width: 4px;
+        .correct-answer { 
+            color: green !important;
+            font-weight: bold;
         }
-        .action-btn { padding: 30px 60px; }
-        .question { padding: 40px; margin: 40px 0; }
-        .wrong-question { margin: 60px 0; }
+        .wrong-answer { 
+            color: red !important;
+            text-decoration: line-through;
+        }
+        .back-btn { 
+            background: #2196F3;
+            margin: 20px auto !important;
+            display: block;
+        }
+        #nextBtn { background: #FF9800; }
+        #submitAnswerBtn { background: #009688; }
+        .error-tips {
+            color: red;
+            font-size: 50px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .result-container {
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+        }
 
-        /* 原有样式保留 */
-        .score { font-size: 28px; color: #4CAF50; margin: 20px 0; font-weight: bold; }
-        .result-container { max-height: 80vh; overflow-y: auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; margin-top: 20px; }
-        .input-group { margin: 15px 0; }
-        .input-group h3 { margin: 10px 0; color: #333; font-size: 18px; }
-        .input-field, .name-select {
-            width: 250px;
-            padding: 12px;
-            margin: 5px 0;
-            border: 2px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-            transition: border-color 0.3s;
+        @media screen and (max-width: 600px) {
+            .container { width: 95%; padding: 10px; }
+            .name-select, .input-field { 
+                width: 100%; 
+                padding: 20px;
+                font-size: 28px !important;
+            }
+            .action-btn { 
+                width: 100%; 
+                padding: 20px;
+                font-size: 28px !important;
+            }
+            .question { padding: 20px; margin: 20px 0; }
+            input[type="radio"] { 
+                width: 40px; 
+                height: 40px; 
+                margin-right: 15px;
+                top: -3px;
+            }
+            .error-tips { font-size: 40px; }
         }
-        .input-field:focus, .name-select:focus {
-            border-color: #4CAF50;
-            outline: none;
-        }
-        .wrong-question { color: black; }
-        .correct-answer { color: red; }
-        .wrong-answer { text-decoration: line-through; }
-        .credit { font-size: 20px; color: red; margin-bottom: 25px; }
-        .container { max-width: 800px; margin: 20px auto; padding: 20px; }
-        .password-box, .result-screen { text-align: center; margin: 50px 0; }
-        .question { margin: 20px 0; border: 1px solid #ccc; padding: 15px; }
-        .options { margin: 10px 0; }
-        .result { color: red; margin: 20px 0; }
-        .action-btn { padding: 12px 30px; margin: 20px 0; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; transition: background 0.3s; }
-        .action-btn:hover { background: #45a049; }
-        .back-btn { background: #2196F3; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div id="passwordScreen" class="password-box">
+        <div id="passwordScreen">
             <div class="credit">由高州一职 Mr Li制作</div>
             <div class="input-group">
                 <h3>请选择您的姓名：</h3>
@@ -110,1080 +165,298 @@
                 <h3>请输入访问密码：</h3>
                 <input type="password" id="passwordInput" class="input-field" placeholder="密码">
             </div>
-            <button class="action-btn" onclick="checkPassword()">进入系统</button>
+            <div class="button-container">
+                <button class="action-btn" id="startBtn">进入系统</button>
+            </div>
         </div>
         
         <div id="quizScreen" style="display: none;">
             <div id="timer" class="timer">05:00</div>
-            <div id="questions"></div>
-            <button class="action-btn" onclick="submitQuiz()">提交答案</button>
+            <div id="currentQuestion"></div>
+            <div class="button-container">
+                <button class="action-btn" id="submitAnswerBtn">确定答案</button>
+                <button class="action-btn" id="nextBtn" style="display: none;">下一题</button>
+            </div>
         </div>
 
-        <div id="resultScreen" class="result-screen" style="display: none;">
-            <button class="action-btn back-btn" onclick="location.reload()">返回首页</button>
-            <div id="finalResult"></div>
+        <div id="resultScreen" style="display: none;">
+            <button class="action-btn back-btn" id="resetBtn">返回首页</button>
+            <div id="finalResult">
+                <h2 style="color:#2196F3; text-align: center;">考生姓名：</h2>
+                <div class="score" style="text-align: center;"></div>
+                <h3 style="text-align: center;"></h3>
+                <div class="result-container"></div>
+            </div>
         </div>
     </div>
 
     <script>
-        // 学生名单
-        const studentList = [
-            "邱日强", "黄火明", "杨名驰", "朱立乾", "邱耀铭", "葛金鹏", "梁皓轩",
-            "郭恩瑞", "程剑豪", "罗远昊", "江柏冠", "卢宝增", "邓镇权", "黄庆飞",
-            "谢泽高", "冯麟斌", "卢子豪", "张超城", "黄析俊", "黄永霖", "李鼎",
-            "邓鸿镇", "黄培轩", "彭家乐", "黄新铧", "谢国永", "曾俊烽", "杨永建",
-            "陈继贤", "刘金灿", "袁乐清", "朱冠帆", "张广隆", "梁国亮", "梁燕辰",
-            "陈江南", "林浩宇", "蔡伟杰", "林松海", "吕仁才", "韦悦", "石江涛",
-            "宁颢然", "刘付煜毅", "梁志鑫", "赖兆霆", "张梓钥", "冯子强", "陈家庆",
-            "陈锡基", "苏子聪"
-        ];
+        (() => {
+            const CONFIG = {
+                password: '2426',
+                examTime: 5,
+                totalQuestions: 20,
+                scorePerQuestion: 5
+            };
 
-        const questions = [
-            {
-                question: "铸铁中平均含碳量一般为",
-                options: ["A: 0.2%", "B: 0.7%", "C: 1.5%", "D: >2.11%"],
-                correct: "D"
-            },
-            {
-                question: "牌号HT200表示的材料是",
-                options: ["A: 碳钢", "B: 合金钢", "C: 铸铁", "D: 黄铜"],
-                correct: "C"
-            },
-            {
-                question: "被连接件的孔都不切制螺纹的螺纹联接是",
-                options: ["A: 螺栓联接", "B: 双头螺柱联接", "C: 螺钉联接", "D: 紧定螺钉联接"],
-                correct: "A"
-            },
-            {
-                question: "非螺纹密封管螺纹的牙型角为",
-                options: ["A: 0°", "B: 30°", "C: 55°", "D: 60°"],
-                correct: "C"
-            },
-	 {
-            "question": "在带传动中带的弹性滑动",
-            "options": ["A: 在张紧力足够时可以避免", "B: 在传动功率较小时可以避免", "C: 在小带轮包角足够大时可以避免", "D: 不可避免"],
-            "correct": "D"
-        },
-        {
-            "question": "一对正常齿制标准外啮合直齿圆柱齿轮，模数为2 mm,小齿轮齿数为21,大齿轮齿数为63,这对齿轮的标准中心距为",
-            "options": ["A: 80mm", "B: 82mm", "C: 84mm", "D: 86mm"],
-            "correct": "C"
-        },
-        {
-            "question": "渐开线齿轮传动的瞬时传动比",
-            "options": ["A: 变化", "B: 恒定", "C: 增大", "D: 减小"],
-            "correct": "B"
-        },
-        {
-            "question": "链传动能用于",
-            "options": ["A: 交叉轴间的传动", "B: 交错轴间的传动", "C: 平行轴间的传动", "D: 可交错，又可平行轴间的传动"],
-            "correct": "C"
-        },
-        {
-            "question": "在铰链四杆机构中，若最短杆和最长杆的长度之和大于其余两杆的长度之和，则机构有",
-            "options": ["A: 一个曲柄", "B: 两个曲柄", "C: 一个摇杆", "D: 两个摇杆"],
-            "correct": "D"
-        },
-        {
-            "question": "常见的凸轮机构中，主动件凸轮通常作",
-            "options": ["A: 等速转动或移动", "B: 变速转动或移动", "C: 变速转动", "D: 变速移动"],
-            "correct": "A"
-        },
-        {
-            "question": "轴与轴承相配合的部分称为",
-            "options": ["A: 轴环", "B: 轴肩", "C: 轴颈", "D: 轴头"],
-            "correct": "C"
-        },
-        {
-            "question": "半圆键的工作面是键的",
-            "options": ["A: 上表面", "B: 圆表面", "C: 两侧面", "D: 上表面和圆表面"],
-            "correct": "C"
-        },
-        {
-            "question": "能承受径向载荷又能承受轴向载荷的滚动轴承是",
-            "options": ["A: 推力球轴承", "B: 圆锥滚子轴承", "C: 圆柱滚子轴承", "D: 滚针轴承"],
-            "correct": "B"
-        },
-        {
-            "question": "在机械图样上标注线性尺寸时，尺寸线用细实线画出",
-            "options": ["A: 也可以用其它图线代替", "B: 不能用其它图线代替", "C: 也可以与其它图线重合", "D: 也可以画在其它图线的延长线上"],
-            "correct": "B"
-        },
-        {
-            "question": "在六个基本视图中，右视图反映物体的",
-            "options": ["A: 长度和高度", "B: 长度和宽度", "C: 宽度和高度", "D: 长度、宽度和高度"],
-            "correct": "C"
-        },
-        {
-            "question": "在剖视图中，同一零件在各视图上的剖面线",
-            "options": ["A: 方向和间隔必须一致", "B: 方向必须一致，间隔可不一致", "C: 方向可不一致，间隔必须一致", "D: 方向和间隔可一致，也可不一致"],
-            "correct": "A"
-        },
-        {
-            "question": "根据齿轮的规定画法，绘制分度圆用",
-            "options": ["A: 粗实线", "B: 细实线", "C: 虚线", "D: 细点画线"],
-            "correct": "D"
-        },
-        {
-            "question": "Q235钢牌号中的235表示",
-            "options": ["A: 碳的质量分数（含碳量）", "B: 钢的质量等级", "C: 钢的脱氧方法", "D: 钢的屈服强度"],
-            "correct": "D"
-        },
-        {
-            "question": "牌号HT200表示的材料为",
-            "options": ["A: 碳钢", "B: 合金钢", "C: 黄铜", "D: 铸铁"],
-            "correct": "D"
-        },
-        {
-            "question": "联接螺纹首先要求自锁性好，而传动螺纹首先要求",
-            "options": ["A: 传动效率高", "B: 平稳性好", "C: 强度高", "D: 自锁性也好"],
-            "correct": "A"
-        },
-        {
-            "question": "螺纹标记M12—6H中的M表示",
-            "options": ["A: 管螺纹牙型代号", "B: 普通螺纹牙型代号", "C: 锯齿形螺纹牙型代号", "D: 梯形螺纹牙型代号"],
-            "correct": "B"
-        },
-        {
-            "question": "普通V带的横截面形状为",
-            "options": ["A: 矩形", "B: 圆形", "C: 扁平形", "D: 等腰梯形"],
-            "correct": "D"
-        },
-        {
-            "question": "有一标准直齿圆柱齿轮，模数为3mm，齿数为20,这个齿轮的分度圆直径为",
-            "options": ["A: 50mm", "B: 55mm", "C: 60mm", "D: 65mm"],
-            "correct": "C"
-        },
-        {
-            "question": "国家标准规定齿轮压力角在",
-            "options": ["A: 齿顶圆上", "B: 齿根圆上", "C: 分度圆上", "D: 基圆上"],
-            "correct": "C"
-        },
-        {
-            "question": "渐开线齿轮传动的瞬时传动比",
-            "options": ["A: 变化", "B: 恒定", "C: 增大", "D: 减小"],
-            "correct": "B"
-        },
-        {
-            "question": "下列传动中，属于啮合类的传动是",
-            "options": ["A: 普通V带传动", "B: 平带传动", "C: 圆带传动", "D: 链传动"],
-            "correct": "D"
-        },
-        {
-            "question": "与机架连接且只能在某一角度范围内摆动的构件称为",
-            "options": ["A: 曲柄", "B: 摇杆", "C: 连杆", "D: 机架"],
-            "correct": "B"
-        },
-        {
-            "question": "能准确地实现复杂运动规律的从动件端部结构是",
-            "options": ["A: 尖顶", "B: 滚子", "C: 平底", "D: 曲面"],
-            "correct": "A"
-        },
-        {
-            "question": "轴与轴承相配合的部分称为",
-            "options": ["A: 轴环", "B: 轴肩", "C: 轴颈", "D: 轴头"],
-            "correct": "C"
-        },
-        {
-            "question": "轴上的键槽通常采用的加工方法是",
-            "options": ["A: 插削", "B: 拉削", "C: 钻及铰", "D: 铣削"],
-            "correct": "D"
-        },
-        {
-            "question": "滚动轴承内圈通常装在轴颈上，一般内圈与轴",
-            "options": ["A: 一起转动", "B: 相对转动", "C: 反向转动", "D: 固定不动"],
-            "correct": "A"
-        },
-        {
-            "question": "主视图所在的投影面简称为",
-            "options": ["A: 正面", "B: 反面", "C: 侧面", "D: 水平面"],
-            "correct": "A"
-        },
-        {
-            "question": "三视图的投影规律中，主视图与左视图应",
-            "options": ["A: 长对正", "B: 高平齐", "C: 宽相等", "D: 高平齐、宽也相等"],
-            "correct": "B"
-        },
-        {
-            "question": "绘制半剖视图时，半个视图和半个剖视图的分界线应为",
-            "options": ["A: 粗实线", "B: 细实线", "C: 虚线", "D: 点画线"],
-            "correct": "A"
-        },
-        {
-            "question": "无论外螺纹还是内螺纹，在剖视图或断面图中的剖面线应画到",
-            "options": ["A: 粗实线", "B: 细实线", "C: 虚线", "D: 细点画线"],
-            "correct": "A"
-        },
-        {
-            "question": "T10A是",
-            "options": ["A: 结构钢", "B: 工具钢", "C: 轴承钢", "D: 特殊性能钢"],
-            "correct": "B"
-        },
-        {
-            "question": "在下列钢号中，属于合金工具钢的是",
-            "options": ["A: T12A", "B: 40Cr", "C: Q235", "D: CrWMn"],
-            "correct": "D"
-        },
-        {
-            "question": "常用的联接螺纹是",
-            "options": ["A: 单线左旋", "B: 单线右旋", "C: 双线左旋", "D: 双线右旋"],
-            "correct": "B"
-        },
-        {
-            "question": "下列螺纹中，牙型角为60°的是",
-            "options": ["A: 管螺纹", "B: 锯齿形螺纹", "C: 梯形螺纹", "D: 普通螺纹"],
-            "correct": "D"
-        },
-        {
-            "question": "在一般的机械传动中，应用最广的带传动是",
-            "options": ["A: 平带传动", "B: 普通V带传动", "C: 圆带传动", "D: 同步带传动"],
-            "correct": "B"
-        },
-        {
-            "question": "某标准直齿圆柱齿轮的全齿高等于9mm,其模数为",
-            "options": ["A: 2mm", "B: 2.5mm", "C: 3mm", "D: 4mm"],
-            "correct": "D"
-        },
-        {
-            "question": "我国规定常用直齿圆柱齿轮的标准压力角为",
-            "options": ["A: 24°", "B: 17°", "C: 20°", "D: 14°30'"],
-            "correct": "C"
-        },
-        {
-            "question": "齿轮上形成渐开线的圆称为",
-            "options": ["A: 齿顶圆", "B: 齿根圆", "C: 分度圆", "D: 基圆"],
-            "correct": "D"
-        },
-        {
-            "question": "链传动是",
-            "options": ["A: 具有中间刚性件的啮合传动", "B: 具有中间弹性件的啮合传动", "C: 具有中间挠性件的啮合传动", "D: 非啮合传动"],
-            "correct": "C"
-        },
-        {
-            "question": "铰链四杆机构中各构件以",
-            "options": ["A: 转动副相联接", "B: 移动副相联接", "C: 螺旋副相联接", "D: 高副相联接"],
-            "correct": "A"
-        },
-        {
-            "question": "在下列凸轮机构中，主动件凸轮作左右往复移动，从动件作上下往复移动的是",
-            "options": ["A: 盘形凸轮", "B: 移动凸轮", "C: 圆柱凸轮", "D: 曲面凸轮"],
-            "correct": "B"
-        },
-        {
-            "question": "齿轮、带轮等传动件在轴上最为广泛使用的周向固定方法是",
-            "options": ["A: 键联接", "B: 销联接", "C: 螺纹联接", "D: 过盈配合"],
-            "correct": "A"
-        },
-        {
-            "question": "普通平键的工作面是键的",
-            "options": ["A: 上表面", "B: 下表面", "C: 上表面和下表面", "D: 两侧面"],
-            "correct": "D"
-        },
-        {
-            "question": "滚动轴承代号3208中，08是轴承的",
-            "options": ["A: 内径代号", "B: 外径代号", "C: 宽（高）度代号", "D: 类型代号"],
-            "correct": "A"
-        },
-        {
-            "question": "标注角度尺寸时，尺寸数字一律写成",
-            "options": ["A: 铅垂方向", "B: 倾斜方向", "C: 水平方向", "D: 任意方向"],
-            "correct": "C"
-        },
-        {
-            "question": "主视图反映机件的方位是",
-            "options": ["A: 上、下和左、右", "B: 左、右和前、后", "C: 上、下和前、后", "D: 上、下、左、右和前、后"],
-            "correct": "A"
-        },
-        {
-            "question": "在机械图样中，向视图的视图配置可表述为",
-            "options": ["A: 按基本视图的配置形式配置", "B: 必须按投影关系配置", "C: 可以自由配置", "D: 按第三角画法的配置规定配置"],
-            "correct": "C"
-        },
-        {
-            "question": "根据螺纹的规定画法，外螺纹的螺纹终止线用",
-            "options": ["A: 粗实线", "B: 细实线", "C: 虚线", "D: 细点画线"],
-            "correct": "A"
-        },
-        {
-            "question": "45钢是",
-            "options": ["A: 结构钢", "B: 工具钢", "C: 轴承钢", "D: 特殊性能钢"],
-            "correct": "A"
-        },
-        {
-            "question": "在下列钢号中，属于碳素结构钢的是",
-            "options": ["A: TI0A", "B: 40Cr", "C: Q235", "D: CrWMn"],
-            "correct": "C"
-        },
-        {
-            "question": "联接螺纹的牙型一般为",
-            "options": ["A: 三角形", "B: 梯形", "C: 矩形", "D: 锯齿形"],
-            "correct": "A"
-        },
-        {
-            "question": "普通螺纹的牙型角为",
-            "options": ["A: 3°", "B: 30°", "C: 55°", "D: 60°"],
-            "correct": "D"
-        },
-        {
-            "question": "在下列传动中，传动件在过载时能起到安全保护作用的是",
-            "options": ["A: 齿轮传动", "B: 螺旋传动", "C: V带传动", "D: 链传动"],
-            "correct": "C"
-        },
-        {
-            "question": "标准直齿圆柱齿轮的全齿高h为",
-            "options": ["A: 1m", "B: 1.25m", "C: 2m", "D: 2.25m"],
-            "correct": "D"
-        },
-        {
-            "question": "直齿圆柱外齿轮的齿顶圆、齿根圆、分度圆的大小关系为",
-            "options": ["A: 齿顶圆>齿根圆>分度圆", "B: 齿顶圆>分度圆>齿根圆", "C: 齿根圆>齿顶圆>分度圆", "D: 分度圆>齿根圆>齿顶圆"],
-            "correct": "B"
-        },
-        {
-            "question": "在齿轮机构中，用于两轴线平行的齿轮传动是",
-            "options": ["A: 直齿圆柱齿轮传动", "B: 直齿圆锥齿轮传动", "C: 斜齿圆锥齿轮传动", "D: 蜗杆传动"],
-            "correct": "A"
-        },
-        {
-            "question": "链传动只限用于",
-            "options": ["A: 交叉轴间的传动", "B: 相交轴间的传动", "C: 交错轴间的传动", "D: 平行轴间的传动"],
-            "correct": "D"
-        },
-            {
-                question: "在曲柄摇杆机构中，最短的构件是",
-                options: ["A: 曲柄", "B: 摇杆", "C: 连杆", "D: 机架"],
-                correct: "A"
-            },
-                {
-                    question: "凸轮机构中凸轮与从动杆接触处的运动到属于",
-                    options: ["A: 移动副", "B: 转动副", "C: 高副", "D: 齿轮副"],
-                    correct: "C"
-                },
-                {
-                    question: "轴环的用途是",
-                    options: ["A: 作为轴加工时的定位面", "B: 提高轴的强度", "C: 提高轴的刚度", "D: 使轴上零件获得轴向定位"],
-                    correct: "D"
-                },
-                {
-                    question: "半圆键的工作面是键的",
-                    options: ["A: 上表面", "B: 圆表面", "C: 两侧面", "D: 上表面和圆表面"],
-                    correct: "C"
-                },
-                {
-                    question: "滚动轴承代号的基础是",
-                    options: ["A: 前置代号", "B: 后置代号", "C: 前置代号和后置代号", "D: 基本代号"],
-                    correct: "D"
-                },
-                {
-                    question: "俯视图所在的投影面简称为",
-                    options: ["A: 正面", "B: 反面", "C: 侧面", "D: 水平面"],
-                    correct: "D"
-                },
-                {
-                    question: "三视图的投影规律中，俯视图与左视图应",
-                    options: ["A: 长对正", "B: 高平齐", "C: 宽相等", "D: 宽相等、高也平齐"],
-                    correct: "C"
-                },
-                {
-                    question: "在机械图样中，绘制重合断面的轮廓线用",
-                    options: ["A: 粗实线", "B: 细实线", "C: 虚线", "D: 细点画线"],
-                    correct: "B"
-                },
-                {
-                    question: "根据螺纹的规定画法，绘制外螺纹的螺纹小径用",
-                    options: ["A: 粗实线", "B: 细实线", "C: 虚线", "D: 细点画线"],
-                    correct: "B"
-                },
-                {
-                    question: "Q235钢是",
-                    options: ["A: 工具钢", "B: 结构钢", "C: 轴承钢", "D: 特殊性能钢"],
-                    correct: "B"
-                },
-                {
-                    question: "HT150表示的材料为",
-                    options: ["A: 碳钢", "B: 合金钢", "C: 铸铁", "D: 黄铜"],
-                    correct: "C"
-                },
-                {
-                    question: "传动螺纹首先要求传动效率高，而联接螺纹首先要求",
-                    options: ["A: 自锁性好", "B: 平稳性好", "C: 强度高", "D: 效率也高"],
-                    correct: "A"
-                },
-                {
-                    question: "普通螺纹的公称直径是",
-                    options: ["A: 螺纹小径", "B: 螺纹中径", "C: 螺纹大径", "D: 平均直径"],
-                    correct: "C"
-                },
-                {
-                    question: "V带传动传递运动和动力是依靠",
-                    options: ["A: 主轴的动力", "B: 带和带轮之间的摩擦力", "C: 主动带轮的转矩", "D: 带在轴上的压力"],
-                    correct: "B"
-                },
-                {
-                    question: "有一标准外啮合直齿圆柱齿轮，模数为2mm,分度圆直径为50mm,齿数为",
-                    options: ["A: 20", "B: 25", "C: 30", "D: 50"],
-                    correct: "B"
-                },
-                {
-                    question: "在渐开线标准直齿圆柱齿轮上，齿厚与齿槽宽相等的圆称为",
-                    options: ["A: 齿顶圆", "B: 齿根圆", "C: 分度圆", "D: 基圆"],
-                    correct: "C"
-                },
-                {
-                    question: "对于齿数相同的齿轮，模数越大，齿轮的承载能力",
-                    options: ["A: 越大", "B: 越小", "C: 有时候大，有时候小", "D: 与模数无关"],
-                    correct: "A"
-                },
-                {
-                    question: "链传动与带传动相比，其主要优点是",
-                    options: ["A: 工作平稳，且无噪声", "B: 制造费用低", "C: 平均传动比准确", "D: 使用寿命长"],
-                    correct: "C"
-                },
-                {
-                    question: "与机架连接且能做整周旋转运动的构件称为",
-                    options: ["A: 曲柄", "B: 摇杆", "C: 连杆", "D: 机架"],
-                    correct: "A"
-                },
-                {
-                    question: "凸轮的最基本型式是",
-                    options: ["A: 盘形凸轮", "B: 移动凸轮", "C: 槽形圆柱凸轮", "D: 端面圆柱凸轮"],
-                    correct: "A"
-                },
-                {
-                    question: "轴与传动零件（轮毂）相配合的部分称为",
-                    options: ["A: 轴环", "B: 轴肩", "C: 轴颈", "D: 轴头"],
-                    correct: "D"
-                },
-                {
-                    question: "在下列键联接中，键槽对轴的强度削弱最大的是",
-                    options: ["A: 钩头楔键", "B: 半圆键", "C: 普通平键", "D: 导向平键"],
-                    correct: "B"
-                },
-                {
-                    question: "深沟球轴承的类型代号是",
-                    options: ["A: 3", "B: 4", "C: 5", "D: 6"],
-                    correct: "D"
-                },
-                {
-                    question: "左视图所在的投影面简称为",
-                    options: ["A: 正面", "B: 反面", "C: 侧面", "D: 水平面"],
-                    correct: "C"
-                },
-                {
-                    question: "三视图的投影规律中，主视图与俯视图应",
-                    options: ["A: 长对正", "B: 高平齐", "C: 宽相等", "D: 长对正、宽也相等"],
-                    correct: "A"
-                },
-                {
-                    question: "在机械图样中，绘制移出断面图的轮廓线用",
-                    options: ["A: 粗实线", "B: 细实线", "C: 虚线", "D: 细点画线"],
-                    correct: "B"
-                },
-                {
-                    question: "据螺纹的规定画法，绘制外螺纹的螺纹大径用",
-                    options: ["A: 粗实线", "B: 细实线", "C: 虚线", "D: 细点画线"],
-                    correct: "A"
-                },
-                {
-                    question: "在下列钢号中，属于合金结构钢的是",
-                    options: ["A: T10A", "B: 40Cr", "C: Q235", "D: CrWMn"],
-                    correct: "B"
-                },
-                {
-                    question: "HT200表示的材料为",
-                    options: ["A: 黄铜", "B: 碳钢", "C: 合金钢", "D: 铸铁"],
-                    correct: "D"
-                },
-                {
-                    question: "在下列的螺纹中，自锁性能最好的是",
-                    options: ["A: 矩形螺纹", "B: 三角形螺纹", "C: 锯齿形螺纹", "D: 梯形螺纹"],
-                    correct: "B"
-                },
-                {
-                    question: "普通螺纹的牙型角为",
-                    options: ["A: 0°", "B: 30°", "C: 55°", "D: 60°"],
-                    correct: "D"
-                },
-                {
-                    question: "按国家标准，普通V带型号有",
-                    options: ["A: 六种", "B: 七种", "C: 八种", "D: 九种"],
-                    correct: "B"
-                },
-                {
-                    question: "有一标准直齿圆柱齿轮，模数为2mm,齿数为21,这个齿轮的分度圆直径为",
-                    options: ["A: 38mm", "B: 40mm", "C: 42mm", "D: 45mm"],
-                    correct: "C"
-                },
-                {
-                    question: "齿轮上形成渐开线的圆称为",
-                    options: ["A: 齿顶圆", "B: 齿根圆", "C: 分度圆", "D: 基圆"],
-                    correct: "D"
-                },
-                {
-                    question: "对于齿数相同的齿轮，模数越大，齿轮的承载能力",
-                    options: ["A: 越小", "B: 越大", "C: 有时候大，有时候小", "D: 与模数无关"],
-                    correct: "B"
-                },
-                {
-                    question: "链传动是",
-                    options: ["A: 具有中间刚性件的啮合传动", "B: 具有中间弹性件的啮合传动", "C: 具有中间挠性件的啮合传动", "D: 不存在啮合传动"],
-                    correct: "C"
-                },
-                {
-                    question: "铰链四杆机构中，与机架相连且只能在某一角度内摆动的构件称为",
-                    options: ["A: 摇杆", "B: 曲柄", "C: 连杆", "D: 机架"],
-                    correct: "A"
-                },
-                {
-                    question: "常见的凸轮机构中，主动件凸轮通常作",
-                    options: ["A: 变速移动", "B: 变速转动", "C: 变速转动或移动", "D: 等速转动或移动"],
-                    correct: "D"
-                },
-                {
-                    question: "轴与轴承相配合的轴段称为",
-                    options: ["A: 轴环", "B: 轴肩", "C: 轴颈", "D: 轴头"],
-                    correct: "C"
-                },
-                {
-                    question: "半圆键的工作面是键的",
-                    options: ["A: 上表面", "B: 圆表面", "C: 两侧面", "D: 上表面和圆表面"],
-                    correct: "C"
-                },
-                {
-                    question: "滚动轴承代号3210中，10是轴承的",
-                    options: ["A: 内径代号", "B: 外径代号", "C: 宽（高）度代号", "D: 类型代号"],
-                    correct: "A"
-                },
-                {
-                    question: "尺寸标注中，符号Φ是表示",
-                    options: ["A: 直径", "B: 半径", "C: 球直径", "D: 球半径"],
-                    correct: "A"
-                },
-                {
-                    question: "主视图反映零件的",
-                    options: ["A: 长度和高度", "B: 长度和宽度", "C: 宽度和高度", "D: 长度"],
-                    correct: "A"
-                },
-                {
-                    question: "在机械图样中，绘制对称中心线、轴线等一般用",
-                    options: ["A: 粗实线", "B: 细实线", "C: 虚线", "D: 细点画线"],
-                    correct: "D"
-                },
-                {
-                    question: "在齿轮的端面视图中绘制分度圆用",
-                    options: ["A: 粗实线", "B: 细实线", "C: 虚线", "D: 细点画线"],
-                    correct: "D"
-                },
-                {
-                    question: "Q235钢是",
-                    options: ["A: 工具钢", "B: 结构钢", "C: 轴承钢", "D: 特殊性能钢"],
-                    correct: "B"
-                },
-                {
-                    question: "一般碳素工具钢为",
-                    options: ["A: 高碳钢", "B: 中碳钢", "C: 低碳钢", "D: 中碳钢或低碳钢"],
-                    correct: "A"
-                },
-                {
-                    question: "联接螺纹首先要求自锁性好，而传动螺纹首先要求",
-                    options: ["A: 强度高", "B: 平稳性好", "C: 效率高", "D: 自锁性也好"],
-                    correct: "C"
-                },
-                {
-                    question: "非螺纹密封管螺纹的牙型角为",
-                    options: ["A: 0°", "B: 30°", "C: 55°", "D: 60°"],
-                    correct: "C"
-                },
-                {
-                    question: "普通V带的横截面形状为",
-                    options: ["A: 矩形", "B: 等腰形", "C: 圆形", "D: 扁平形"],
-                    correct: "B"
-                },
-                {
-                    question: "标准正常齿制直齿圆柱齿轮的全齿高等于",
-                    options: ["A: 2.25m", "B: 2m", "C: 1.25m", "D: m"],
-                    correct: "A"
-                },
-                {
-                    question: "国家标准中规定齿轮压力角是在",
-                    options: ["A: 齿顶圆上", "B: 齿根圆上", "C: 分度圆上", "D: 基圆上"],
-                    correct: "C"
-                },
-                {
-                    question: "下列齿轮传动中，属于交错轴齿轮传动的是",
-                    options: ["A: 直齿圆柱齿轮传动", "B: 蜗杆传动", "C: 直齿圆锥齿轮传动", "D: 齿轮齿条传动"],
-                    correct: "B"
-                },
-                {
-                    question: "下列传动中，属于啮合类传动的是",
-                    options: ["A: 链传动", "B: 平带传动", "C: 圆带传动", "D: 普通V带传动"],
-                    correct: "A"
-                },
-                {
-                    question: "双摇杆机构具有",
-                    options: ["A: 一个曲柄", "B: 一个摇杆", "C: 两个曲柄", "D: 两个摇杆"],
-                    correct: "D"
-                },
-                {
-                    question: "凸轮机构从动件的端部结构最容易磨损的是",
-                    options: ["A: 球面", "B: 尖顶", "C: 平底", "D: 滚子"],
-                    correct: "B"
-                },
-                {
-                    question: "直轴和曲轴的区别在于",
-                    options: ["A: 工作状态不同", "B: 轴的直径不同", "C: 轴线形状不同", "D: 承载情况不同"],
-                    correct: "C"
-                },
-                {
-                    question: "在下列键联接中，键槽对轴的强度削弱最大的是",
-                    options: ["A: 导向平键", "B: 钩头楔键", "C: 半圆键", "D: 普通平键"],
-                    correct: "C"
-                },
-                {
-                    question: "滚动轴承内圈通常装在轴颈上，一般内圈与轴",
-                    options: ["A: 固定不动", "B: 反向转动", "C: 相对转动", "D: 一起转动"],
-                    correct: "D"
-                },
-                {
-                    question: "绘制机械图样主要采用",
-                    options: ["A: 中心投影法", "B: 正投影法", "C: 斜投影法", "D: 中心投影法和斜投影法都可"],
-                    correct: "B"
-                },
-                {
-                    question: "在六个基本视图中，主视图反映物体的",
-                    options: ["A: 长度、宽度和高度", "B: 宽度和高度", "C: 长度和宽度", "D: 长度和高度"],
-                    correct: "D"
-                },
-                {
-                    question: "在剖视图中绘制金属材料的剖面线用适当角度的",
-                    options: ["A: 细实线", "B: 粗实线", "C: 细点画线", "D: 虚线"],
-                    correct: "A"
-                },
-                {
-                    question: "根据齿轮的规定画法，在表示齿轮端面的视图中绘制分度圆用",
-                    options: ["A: 粗实线", "B: 细实线", "C: 虚线", "D: 细点画线"],
-                    correct: "D"
-                },
-                {
-                    question: "45钢是",
-                    options: ["A: 工具钢", "B: 结构钢", "C: 轴承钢", "D: 特殊性能钢"],
-                    correct: "B"
-                },
-                {
-                    question: "一般低合金工具钢为",
-                    options: ["A: 高碳钢", "B: 中碳钢", "C: 低碳钢", "D: 中碳钢或低碳钢"],
-                    correct: "D"
-                },
-                {
-                    question: "传动螺纹首先要求效率高，而联接螺纹首先要求",
-                    options: ["A: 强度高", "B: 平稳性好", "C: 自锁性好", "D: 效率也高"],
-                    correct: "C"
-                },
-                {
-                    question: "牙型角为60°的螺纹是",
-                    options: ["A: 梯形螺纹", "B: 普通螺纹", "C: 锯齿形螺纹", "D: 管螺纹"],
-                    correct: "B"
-                },
-                {
-                    question: "V带传动中，V带的工作面是",
-                    options: ["A: 单侧面", "B: 两侧面", "C: 内圆周面", "D: 外圆周面"],
-                    correct: "B"
-                },
-                {
-                    question: "某正常齿制标准外啮合直齿圆柱齿轮的全齿高等于9mm,其模数等于",
-                    options: ["A: 4mm", "B: 3mm", "C: 2.5mm", "D: 2mm"],
-                    correct: "A"
-                },
-                    {
-                        question: "齿轮上形成渐开线的圆称为",
-                        options: ["A: 齿顶圆", "B: 齿根圆", "C: 分度圆", "D: 基圆"],
-                        correct: "D"
-                    },
-                        {
-                            question: "直齿圆锥齿轮传动属于",
-                            options: ["A: 交错轴齿轮传动", "B: 平行轴齿轮传动", "C: 相交轴齿轮传动", "D: 任意位置轴齿轮传动"],
-                            correct: "C"
-                        },
-                        {
-                            question: "链传动只限用于",
-                            options: ["A: 相交轴间的传动", "B: 交错轴间的传动", "C: 平行轴间的传动", "D: 交叉轴间的传动"],
-                            correct: "C"
-                        },
-                        {
-                            question: "在曲柄摇杆机构中，最短的构件是",
-                            options: ["A: 摇杆", "B: 曲柄", "C: 连杆", "D: 机架"],
-                            correct: "B"
-                        },
-                        {
-                            question: "凸轮机构中凸轮与从动件接触处的运动副属于",
-                            options: ["A: 低副", "B: 移动副", "C: 转动副", "D: 高副"],
-                            correct: "D"
-                        },
-                        {
-                            question: "在阶梯轴上的回转件最常用的轴向固定形式是",
-                            options: ["A: 平键联接", "B: 圆锥销联接", "C: 轴肩和轴环", "D: 花键联接"],
-                            correct: "C"
-                        },
-                        {
-                            question: "在下列键联接中，对中性最好的是",
-                            options: ["A: 切向键", "B: 钩头楔键", "C: 普通楔键", "D: 普通平键"],
-                            correct: "D"
-                        },
-                        {
-                            question: "只能承受径向载荷的滚动轴承是",
-                            options: ["A: 推力球轴承", "B: 圆锥滚子轴承", "C: 深沟球轴承", "D: 圆柱滚子轴承"],
-                            correct: "D"
-                        },
-                        {
-                            question: "图样不论放大或缩小绘制，在标注尺寸时应标注",
-                            options: ["A: 机件的毛坯尺寸", "B: 机件的工艺尺寸", "C: 机件放大或缩小之后的图中数值", "D: 机件完工后的尺寸"],
-                            correct: "D"
-                        },
-                        {
-                            question: "在六个基本视图中，俯视图反映物体的",
-                            options: ["A: 长度、宽度和高度", "B: 长度和高度", "C: 长度和宽度", "D: 宽度和高度"],
-                            correct: "C"
-                        },
-                        {
-                            question: "在机械图样中，绘制局部视图的断裂边界常用",
-                            options: ["A: 粗实线", "B: 细点画线", "C: 波浪线", "D: 双点画线"],
-                            correct: "C"
-                        },
-                        {
-                            question: "根据螺纹的规定画法，绘制外螺纹的螺纹大径用",
-                            options: ["A: 虚线", "B: 细实线", "C: 细点画线", "D: 粗实线"],
-                            correct: "D"
-                        },
-                        {
-                            question: "9SiCr钢是",
-                            options: ["A: 结构钢", "B: 工具钢", "C: 轴承钢", "D: 特殊性能钢"],
-                            correct: "B"
-                        },
-                        {
-                            question: "HT200表示材料为",
-                            options: ["A: 灰铸铁", "B: 碳钢", "C: 合金钢", "D: 黄铜"],
-                            correct: "A"
-                        },
-                        {
-                            question: "在下列螺纹中自锁性能最好的是",
-                            options: ["A: 粗牙普通螺纹", "B: 细牙普通螺纹", "C: 梯形螺纹", "D: 矩形螺纹"],
-                            correct: "B"
-                        },
-                        {
-                            question: "普通螺纹的公称直径是指",
-                            options: ["A: 螺纹小径", "B: 螺纹中径", "C: 螺纹大径", "D: 螺纹平均直径"],
-                            correct: "C"
-                        },
-                        {
-                            question: "具有准确传动比的带传动是",
-                            options: ["A: 普通V带传动", "B: 平带传动", "C: 窄V带传动", "D: 同步带传动"],
-                            correct: "D"
-                        },
-                        {
-                            question: "在标准直齿圆柱齿轮中，模数与齿数的乘积为",
-                            options: ["A: 齿根圆直径", "B: 齿顶圆直径", "C: 基圆直径", "D: 分度圆直径"],
-                            correct: "D"
-                        },
-                        {
-                            question: "渐开线齿轮传动的瞬时传动比",
-                            options: ["A: 增大或减小", "B: 恒定", "C: 增大", "D: 减小"],
-                            correct: "B"
-                        },
-                        {
-                            question: "蜗传动属于",
-                            options: ["A: 相交轴齿轮传动", "B: 平行轴齿轮传动", "C: 交错轴齿轮传动", "D: 任意位置轴齿轮传动"],
-                            correct: "C"
-                        },
-                        {
-                            question: "链传动与带传动相比",
-                            options: ["A: 能过载安全保护", "B: 传动效率低", "C: 平均传动比准确", "D: 作用在轴和轴承上的力较大"],
-                            correct: "C"
-                        },
-                        {
-                            question: "在曲柄摇杆机构中，曲柄的长度",
-                            options: ["A: 最短", "B: 最长", "C: 大于摇杆长度", "D: 大于连杆长度"],
-                            correct: "A"
-                        },
-                        {
-                            question: "凸轮机构中，凸轮通常作",
-                            options: ["A: 变速移动", "B: 变速转动", "C: 变速转动或移动", "D: 等速转动或移动"],
-                            correct: "D"
-                        },
-                        {
-                            question: "齿轮、带轮等传动件在轴上作周向固定最广泛使用的方法是",
-                            options: ["A: 过盈配合", "B: 螺纹联接", "C: 键联接", "D: 销联接"],
-                            correct: "C"
-                        },
-                        {
-                            question: "下列键联接中，属于紧键联接的是",
-                            options: ["A: 半圆键联接", "B: 花键联接", "C: 普通平键联接", "D: 楔键联接"],
-                            correct: "D"
-                        },
-                        {
-                            question: "在选用滚动轴承时，应考虑轴承的极限转速，高速时应优先选用",
-                            options: ["A: 圆锥滚子轴承", "B: 推力球轴承", "C: 圆柱滚子轴承", "D: 球轴承"],
-                            correct: "D"
-                        },
-                        {
-                            question: "主视图所在的投影面又称为",
-                            options: ["A: 正面", "B: 侧面", "C: 水平面", "D: 垂直面"],
-                            correct: "A"
-                        },
-                        {
-                            question: "在六个基本视图中，左视图反映物体的",
-                            options: ["A: 长度、宽度和高度", "B: 宽度和高度", "C: 长度和宽度", "D: 长度和高度"],
-                            correct: "B"
-                        },
-                        {
-                            question: "绘制半剖视图时，半个视图和半个剖视图的分界线应为",
-                            options: ["A: 粗实线", "B: 细实线", "C: 细点画线", "D: 虚线"],
-                            correct: "C"
-                        },
-                        {
-                            question: "根据螺纹的规定画法，绘制外螺纹的螺纹小径用",
-                            options: ["A: 粗实线", "B: 细实线", "C: 细点画线", "D: 虚线"],
-                            correct: "B"
-                        },
-        {
-            question: "在下列钢号中，属于碳素结构钢的是",
-            options: ["A: 45", "B: T7A", "C: 9SiCr", "D: 40Cr"],
-            correct: "A"
-        },
-        {
-            question: "适合用于制造手锤的材料是",
-            options: ["A: 结构钢", "B: 工具钢", "C: 特殊性能钢", "D: 铸铁"],
-            correct: "B"
-        },
-        {
-            question: "常用的联接螺纹是",
-            options: ["A: 双线左旋", "B: 双线右旋", "C: 单线左旋", "D: 单线右旋"],
-            correct: "D"
-        },
-        {
-            question: "一般管螺纹的牙型角为",
-            options: ["A: 60°", "B: 55°", "C: 30°", "D: 0°"],
-            correct: "B"
-        },
-        {
-            question: "下列带传动中，不属于摩擦型带传动的是",
-            options: ["A: 同步带传动", "B: 圆带传动", "C: V带传动", "D: 平带传动"],
-            correct: "A"
-        },
-        {
-            question: "有一对外啮合标准直齿圆柱齿轮，模数为2mm，大齿轮齿数为60，小齿轮齿数为40, 这对齿轮的中心距为",
-            options: ["A: 130mm", "B: 120mm", "C: 100mm", "D: 80mm"],
-            correct: "C"
-        },
-        {
-            question: "国家标准中规定齿轮压力角是在",
-            options: ["A: 分度圆上", "B: 基圆上", "C: 齿根圆上", "D: 齿顶圆上"],
-            correct: "A"
-        },
-        {
-            question: "对于齿数相同的齿轮，模数越大，齿轮的承载能力",
-            options: ["A: 有时候大，有时候小", "B: 与模数无关", "C: 越小", "D: 越大"],
-            correct: "D"
-        },
-        {
-            question: "下列传动中，属于啮合类传动的是",
-            options: ["A: 平带传动", "B: 普通V带传动", "C: 圆带传动", "D: 链传动"],
-            correct: "D"
-        },
-        {
-            question: "双摇杆机构具有",
-            options: ["A: 两个曲柄", "B: 一个曲柄", "C: 两个摇杆", "D: 一个摇杆"],
-            correct: "C"
-        },
-        {
-            question: "在生产实际中最为常见的凸轮是",
-            options: ["A: 圆柱凸轮", "B: 盘形凸轮", "C: 移动凸轮", "D: 曲面凸轮"],
-            correct: "B"
-        },
-        {
-            question: "轴由滚动轴承支承时，其轴颈直径必须符合滚动轴承的",
-            options: ["A: 宽度系列", "B: 内径系列", "C: 高度系列", "D: 外径系列"],
-            correct: "B"
-        },
-        {
-            question: "以键的两侧面为工作面的是",
-            options: ["A: 普通楔键", "B: 钩头楔键", "C: 半圆键", "D: 切向键"],
-            correct: "C"
-        },
-        {
-            question: "深沟球轴承的滚动轴承类型代号是",
-            options: ["A: 6", "B: 5", "C: 4", "D: 3"],
-            correct: "A"
-        },
-        {
-            question: "绘制某机件图样时采用比例为5:1，该比例为",
-            options: ["A: 任意比例", "B: 放大比例", "C: 缩小比例", "D: 原值比例"],
-            correct: "B"
-        },
-        {
-            question: "主视图所在的投影面简称为",
-            options: ["A: 水平面", "B: 正面", "C: 反面", "D: 侧面"],
-            correct: "B"
-        },
-        {
-            question: "在剖视图中绘制外螺纹大径用",
-            options: ["A: 虚线", "B: 点画线", "C: 细实线", "D: 粗实线"],
-            correct: "D"
-        },
-        {
-            question: "在AutoCAD中取消已执行的命令，可以使用命令",
-            options: ["A: Trim", "B: Save", "C: Open", "D: Undo"],
-            correct: "D"
-        }
-        ];
+            const studentList = [
+                "邱日强", "黄火明", "杨名驰", "朱立乾", "邱耀铭", "葛金鹏", "梁皓轩",
+                "郭恩瑞", "程剑豪", "罗远昊", "江柏冠", "卢宝增", "邓镇权", "黄庆飞",
+                "谢泽高", "冯麟斌", "卢子豪", "张超城", "黄析俊", "黄永霖", "李鼎",
+                "邓鸿镇", "黄培轩", "彭家乐", "黄新铧", "谢国永", "曾俊烽", "杨永建",
+                "陈继贤", "刘金灿", "袁乐清", "朱冠帆", "张广隆", "梁国亮", "梁燕辰",
+                "陈江南", "林浩宇", "蔡伟杰", "林松海", "吕仁才", "韦悦", "石江涛",
+                "宁颢然", "刘付煜毅", "梁志鑫", "赖兆霆", "张梓钥", "冯子强", "陈家庆",
+                "陈锡基", "苏子聪"
+            ];
 
-        let selectedQuestions = [];
-        let userAnswers = {};
-        let userName = '';
-        let countdownTimer;
+            const questions = [
+                { question: "铸铁中平均含碳量一般为", options: ["A: 0.2%", "B: 0.7%", "C: 1.5%", "D: >2.11%"], correct: "D" },
+                { question: "牌号HT200表示的材料是", options: ["A: 碳钢", "B: 合金钢", "C: 铸铁", "D: 黄铜"], correct: "C" },
+                { question: "被连接件的孔都不切制螺纹的螺纹联接是", options: ["A: 螺栓联接", "B: 双头螺柱联接", "C: 螺钉联接", "D: 紧定螺钉联接"], correct: "A" },
+                { question: "非螺纹密封管螺纹的牙型角为", options: ["A: 0°", "B: 30°", "C: 55°", "D: 60°"], correct: "C" },
+                { question: "在带传动中带的弹性滑动", options: ["A: 在张紧力足够时可以避免", "B: 在传动功率较小时可以避免", "C: 在小带轮包角足够大时可以避免", "D: 不可避免"], correct: "D" },
+                { question: "一对正常齿制标准外啮合直齿圆柱齿轮，模数为2 mm,小齿轮齿数为21,大齿轮齿数为63,这对齿轮的标准中心距为", options: ["A: 80mm", "B: 82mm", "C: 84mm", "D: 86mm"], correct: "C" },
+                { question: "渐开线齿轮传动的瞬时传动比", options: ["A: 变化", "B: 恒定", "C: 增大", "D: 减小"], correct: "B" },
+                { question: "链传动能用于", options: ["A: 交叉轴间的传动", "B: 交错轴间的传动", "C: 平行轴间的传动", "D: 可交错，又可平行轴间的传动"], correct: "C" },
+                { question: "在铰链四杆机构中，若最短杆和最长杆的长度之和大于其余两杆的长度之和，则机构有", options: ["A: 一个曲柄", "B: 两个曲柄", "C: 一个摇杆", "D: 两个摇杆"], correct: "D" },
+                { question: "常见的凸轮机构中，主动件凸轮通常作", options: ["A: 等速转动或移动", "B: 变速转动或移动", "C: 变速转动", "D: 变速移动"], correct: "A" },
+                { question: "轴与轴承相配合的部分称为", options: ["A: 轴环", "B: 轴肩", "C: 轴颈", "D: 轴头"], correct: "C" },
+                { question: "半圆键的工作面是键的", options: ["A: 上表面", "B: 圆表面", "C: 两侧面", "D: 上表面和圆表面"], correct: "C" },
+                { question: "能承受径向载荷又能承受轴向载荷的滚动轴承是", options: ["A: 推力球轴承", "B: 圆锥滚子轴承", "C: 圆柱滚子轴承", "D: 滚针轴承"], correct: "B" },
+                { question: "在机械图样上标注线性尺寸时，尺寸线用细实线画出", options: ["A: 也可以用其它图线代替", "B: 不能用其它图线代替", "C: 也可以与其它图线重合", "D: 也可以画在其它图线的延长线上"], correct: "B" },
+                { question: "在六个基本视图中，右视图反映物体的", options: ["A: 长度和高度", "B: 长度和宽度", "C: 宽度和高度", "D: 长度、宽度和高度"], correct: "C" },
+                { question: "在剖视图中，同一零件在各视图上的剖面线", options: ["A: 方向和间隔必须一致", "B: 方向必须一致，间隔可不一致", "C: 方向可不一致，间隔必须一致", "D: 方向和间隔可一致，也可不一致"], correct: "A" },
+                { question: "根据齿轮的规定画法，绘制分度圆用", options: ["A: 粗实线", "B: 细实线", "C: 虚线", "D: 细点画线"], correct: "D" },
+                { question: "Q235钢牌号中的235表示", options: ["A: 碳的质量分数（含碳量）", "B: 钢的质量等级", "C: 钢的脱氧方法", "D: 钢的屈服强度"], correct: "D" },
+                { question: "联接螺纹首先要求自锁性好，而传动螺纹首先要求", options: ["A: 传动效率高", "B: 平稳性好", "C: 强度高", "D: 自锁性也好"], correct: "A" },
+                { question: "螺纹标记M12—6H中的M表示", options: ["A: 管螺纹牙型代号", "B: 普通螺纹牙型代号", "C: 锯齿形螺纹牙型代号", "D: 梯形螺纹牙型代号"], correct: "B" },
+                { question: "普通V带的横截面形状为", options: ["A: 矩形", "B: 圆形", "C: 扁平形", "D: 等腰梯形"], correct: "D" },
+                { question: "有一标准直齿圆柱齿轮，模数为3mm，齿数为20,这个齿轮的分度圆直径为", options: ["A: 50mm", "B: 55mm", "C: 60mm", "D: 65mm"], correct: "C" },
+                { question: "国家标准规定齿轮压力角在", options: ["A: 齿顶圆上", "B: 齿根圆上", "C: 分度圆上", "D: 基圆上"], correct: "C" },
+                { question: "渐开线齿轮传动的瞬时传动比", options: ["A: 变化", "B: 恒定", "C: 增大", "D: 减小"], correct: "B" },
+                { question: "下列传动中，属于啮合类的传动是", options: ["A: 普通V带传动", "B: 平带传动", "C: 圆带传动", "D: 链传动"], correct: "D" },
+                { question: "与机架连接且只能在某一角度范围内摆动的构件称为", options: ["A: 曲柄", "B: 摇杆", "C: 连杆", "D: 机架"], correct: "B" },
+                { question: "能准确地实现复杂运动规律的从动件端部结构是", options: ["A: 尖顶", "B: 滚子", "C: 平底", "D: 曲面"], correct: "A" },
+                { question: "轴上的键槽通常采用的加工方法是", options: ["A: 插削", "B: 拉削", "C: 钻及铰", "D: 铣削"], correct: "D" },
+                { question: "滚动轴承内圈通常装在轴颈上，一般内圈与轴", options: ["A: 一起转动", "B: 相对转动", "C: 反向转动", "D: 固定不动"], correct: "A" },
+                { question: "主视图所在的投影面简称为", options: ["A: 正面", "B: 反面", "C: 侧面", "D: 水平面"], correct: "A" },
+                { question: "三视图的投影规律中，主视图与左视图应", options: ["A: 长对正", "B: 高平齐", "C: 宽相等", "D: 高平齐、宽也相等"], correct: "B" },
+                { question: "绘制半剖视图时，半个视图和半个剖视图的分界线应为", options: ["A: 粗实线", "B: 细实线", "C: 虚线", "D: 点画线"], correct: "A" },
+                { question: "无论外螺纹还是内螺纹，在剖视图或断面图中的剖面线应画到", options: ["A: 粗实线", "B: 细实线", "C: 虚线", "D: 细点画线"], correct: "A" },
+                { question: "T10A是", options: ["A: 结构钢", "B: 工具钢", "C: 轴承钢", "D: 特殊性能钢"], correct: "B" },
+                { question: "在下列钢号中，属于合金工具钢的是", options: ["A: T12A", "B: 40Cr", "C: Q235", "D: CrWMn"], correct: "D" },
+                { question: "常用的联接螺纹是", options: ["A: 单线左旋", "B: 单线右旋", "C: 双线左旋", "D: 双线右旋"], correct: "B" },
+                { question: "下列螺纹中，牙型角为60°的是", options: ["A: 管螺纹", "B: 锯齿形螺纹", "C: 梯形螺纹", "D: 普通螺纹"], correct: "D" },
+                { question: "在一般的机械传动中，应用最广的带传动是", options: ["A: 平带传动", "B: 普通V带传动", "C: 圆带传动", "D: 同步带传动"], correct: "B" },
+                { question: "某标准直齿圆柱齿轮的全齿高等于9mm,其模数为", options: ["A: 2mm", "B: 2.5mm", "C: 3mm", "D: 4mm"], correct: "D" },
+                { question: "我国规定常用直齿圆柱齿轮的标准压力角为", options: ["A: 24°", "B: 17°", "C: 20°", "D: 14°30'"], correct: "C" },
+                { question: "齿轮上形成渐开线的圆称为", options: ["A: 齿顶圆", "B: 齿根圆", "C: 分度圆", "D: 基圆"], correct: "D" },
+                { question: "链传动是", options: ["A: 具有中间刚性件的啮合传动", "B: 具有中间弹性件的啮合传动", "C: 具有中间挠性件的啮合传动", "D: 非啮合传动"], correct: "C" },
+                { question: "铰链四杆机构中各构件以", options: ["A: 转动副相联接", "B: 移动副相联接", "C: 螺旋副相联接", "D: 高副相联接"], correct: "A" },
+                { question: "在下列凸轮机构中，主动件凸轮作左右往复移动，从动件作上下往复移动的是", options: ["A: 盘形凸轮", "B: 移动凸轮", "C: 圆柱凸轮", "D: 曲面凸轮"], correct: "B" }
+            ];
 
-        // 页面加载时初始化下拉菜单
-        window.onload = function() {
-            const nameSelect = document.getElementById('nameSelect');
-            studentList.forEach(student => {
-                const option = document.createElement('option');
-                option.value = student;
-                option.textContent = student;
-                nameSelect.appendChild(option);
-            });
-        };
+            let state = {
+                currentQuestionIndex: 0,
+                userAnswers: {},
+                userName: '',
+                countdownTimer: null,
+                selectedQuestions: []
+            };
 
-        function checkPassword() {
-            const selectedName = document.getElementById('nameSelect').value;
-            const password = document.getElementById('passwordInput').value;
-            
-            if (!selectedName) {
-                alert('请从下拉菜单中选择您的姓名！');
-                return;
-            }
-            
-            const isValidStudent = studentList.some(name => 
-                name.toLowerCase() === selectedName.toLowerCase()
-            );
-            
-            if (!isValidStudent) {
-                alert('错误：姓名不在学生名单中！');
-                return;
-            }
-            if (password !== '2426') {
-                alert('错误：密码不正确！');
-                return;
+            const elements = {
+                passwordScreen: document.getElementById('passwordScreen'),
+                quizScreen: document.getElementById('quizScreen'),
+                resultScreen: document.getElementById('resultScreen'),
+                nameSelect: document.getElementById('nameSelect'),
+                passwordInput: document.getElementById('passwordInput'),
+                startBtn: document.getElementById('startBtn'),
+                currentQuestion: document.getElementById('currentQuestion'),
+                submitAnswerBtn: document.getElementById('submitAnswerBtn'),
+                nextBtn: document.getElementById('nextBtn'),
+                timer: document.getElementById('timer'),
+                finalResult: document.getElementById('finalResult'),
+                resetBtn: document.getElementById('resetBtn')
+            };
+
+            function init() {
+                // 初始化学生名单
+                studentList.forEach(student => {
+                    const option = document.createElement('option');
+                    option.value = student;
+                    option.textContent = student;
+                    elements.nameSelect.appendChild(option);
+                });
+
+                // 绑定事件
+                elements.startBtn.addEventListener('click', checkPassword);
+                elements.submitAnswerBtn.addEventListener('click', checkAnswer);
+                elements.nextBtn.addEventListener('click', nextQuestion);
+                elements.resetBtn.addEventListener('click', resetSystem);
             }
 
-            userName = selectedName || "匿名用户";
-            document.getElementById('passwordScreen').style.display = 'none';
-            document.getElementById('quizScreen').style.display = 'block';
-            initializeQuiz();
-            startTimer(5);
-        }
+            function resetSystem() {
+                clearInterval(state.countdownTimer);
+                state = {
+                    currentQuestionIndex: 0,
+                    userAnswers: {},
+                    userName: '',
+                    countdownTimer: null,
+                    selectedQuestions: []
+                };
+                elements.passwordScreen.style.display = 'block';
+                elements.quizScreen.style.display = 'none';
+                elements.resultScreen.style.display = 'none';
+                elements.nameSelect.selectedIndex = 0;
+                elements.passwordInput.value = '';
+                window.scrollTo({ top: 0, behavior: 'instant' });
+            }
 
-        function startTimer(minutes) {
-            let time = minutes * 60;
-            countdownTimer = setInterval(() => {
-                const minutesLeft = Math.floor(time / 60);
-                const secondsLeft = time % 60;
-                document.getElementById('timer').textContent = 
-                    `${String(minutesLeft).padStart(2, '0')}:${String(secondsLeft).padStart(2, '0')}`;
+            function checkPassword() {
+                const selectedName = elements.nameSelect.value;
+                const password = elements.passwordInput.value;
                 
-                if (time <= 0) {
-                    clearInterval(countdownTimer);
-                    submitQuiz();
+                if (!selectedName || selectedName === "请选择姓名") {
+                    alert("请先选择您的姓名！");
+                    return;
                 }
-                time--;
-            }, 1000);
-        }
+                if (password !== CONFIG.password) {
+                    alert("密码错误！");
+                    return;
+                }
 
-        function initializeQuiz() {
-            const shuffled = questions.sort(() => 0.5 - Math.random());
-            selectedQuestions = shuffled.slice(0, 20);
-            
-            let html = '';
-            selectedQuestions.forEach((q, index) => {
-                html += `<div class="question">
-                    <p>${index+1}. ${q.question}</p>
+                state.userName = selectedName;
+                elements.passwordScreen.style.display = 'none';
+                elements.quizScreen.style.display = 'block';
+                initializeQuiz();
+                startTimer();
+            }
+
+            function startTimer() {
+                let time = CONFIG.examTime * 60;
+                state.countdownTimer = setInterval(() => {
+                    time--;
+                    const minutes = ("0" + Math.floor(time / 60)).slice(-2);
+                    const seconds = ("0" + (time % 60)).slice(-2);
+                    elements.timer.textContent = `${minutes}:${seconds}`;
+                    if (time <= 0) submitQuiz();
+                }, 1000);
+            }
+
+            function initializeQuiz() {
+                state.selectedQuestions = questions.sort(() => Math.random() - 0.5).slice(0, CONFIG.totalQuestions);
+                state.currentQuestionIndex = 0;
+                showCurrentQuestion();
+            }
+
+            function showCurrentQuestion() {
+                const q = state.selectedQuestions[state.currentQuestionIndex];
+                let html = `<div class="question">
+                    <p>第${state.currentQuestionIndex + 1}题：${q.question}</p>
                     <div class="options">`;
-                q.options.forEach(option => {
+                
+                q.options.forEach(opt => {
+                    const isChecked = state.userAnswers[state.currentQuestionIndex] === opt[0];
                     html += `<label>
-                        <input type="radio" name="q${index}" value="${option[0]}">
-                        ${option}
+                        <input type="radio" name="current" value="${opt[0]}" ${isChecked ? 'checked' : ''}>
+                        ${opt}
                     </label><br>`;
                 });
-                html += `</div></div>`;
-            });
-            document.getElementById('questions').innerHTML = html;
-        }
-
-        function submitQuiz() {
-            clearInterval(countdownTimer);
-            userAnswers = {};
-            selectedQuestions.forEach((q, index) => {
-                const selected = document.querySelector(`input[name="q${index}"]:checked`);
-                userAnswers[index] = selected ? selected.value : '';
-            });
-
-            let correct = 0;
-            let wrongDetails = [];
-            
-            selectedQuestions.forEach((q, index) => {
-                if (userAnswers[index] === q.correct) {
-                    correct++;
-                } else {
-                    wrongDetails.push({
-                        number: index + 1,
-                        question: q.question,
-                        options: q.options,
-                        correct: q.correct,
-                        userAnswer: userAnswers[index]
-                    });
-                }
-            });
-
-            const totalQuestions = 20;
-            const scorePerQuestion = 5;
-            const totalScore = correct * scorePerQuestion;
-
-            let resultHtml = `<h2 style="color:#2196F3">考生姓名：${userName}</h2>`;
-            resultHtml += `<div class="score">得分：${totalScore}分</div>`;
-            resultHtml += `<h3>正确：${correct}题 / 总计：${totalQuestions}题</h3>`;
-            resultHtml += `<div class="result-container">`;
-            if (wrongDetails.length > 0) {
-                resultHtml += `<h4>错题解析：</h4>`;
-                wrongDetails.forEach(item => {
-                    resultHtml += `
-                        <div class="wrong-question">
-                            <p>${item.number}. ${item.question}</p>
-                            <div class="options">`;
-                    
-                    item.options.forEach(option => {
-                        const optionKey = option[0];
-                        const isCorrect = optionKey === item.correct;
-                        const isWrongSelected = optionKey === item.userAnswer && !isCorrect;
-                        
-                        let styleClass = '';
-                        if (isCorrect) {
-                            styleClass = 'correct-answer';
-                        } else if (isWrongSelected) {
-                            styleClass = 'wrong-answer';
-                        }
-
-                        resultHtml += `<div class="${styleClass}">${option}</div>`;
-                    });
-
-                    resultHtml += `</div></div><hr>`;
-                });
+                
+                elements.currentQuestion.innerHTML = html + '</div></div>';
+                elements.submitAnswerBtn.style.display = 'block';
+                elements.nextBtn.style.display = 'none';
             }
-            resultHtml += `</div>`;
 
-            document.getElementById('quizScreen').style.display = 'none';
-            document.getElementById('resultScreen').style.display = 'block';
-            document.getElementById('finalResult').innerHTML = resultHtml;
+            function checkAnswer() {
+                const selected = document.querySelector('input[name="current"]:checked');
+                const userAnswer = selected ? selected.value : '';
+                const q = state.selectedQuestions[state.currentQuestionIndex];
+                
+                // 显示即时反馈
+                const errorTips = document.createElement('div');
+                errorTips.className = 'error-tips';
+                if(userAnswer !== q.correct) {
+                    errorTips.innerHTML = `✘ 正确答案：${q.options.find(opt => opt[0] === q.correct)}`;
+                } else {
+                    errorTips.innerHTML = `✔ 回答正确`;
+                    errorTips.style.color = 'green';
+                }
+                document.querySelector('.error-tips')?.remove();
+                elements.currentQuestion.after(errorTips);
 
-            window.scrollTo(0, 0);
-        }
+                // 高亮答案
+                document.querySelectorAll('label').forEach(label => {
+                    const optValue = label.querySelector('input').value;
+                    label.style.color = optValue === q.correct ? 'green' : 
+                                     (optValue === userAnswer ? 'red' : '#333');
+                });
+
+                // 保存答案
+                state.userAnswers[state.currentQuestionIndex] = userAnswer;
+                elements.submitAnswerBtn.style.display = 'none';
+                elements.nextBtn.style.display = 'block';
+            }
+
+            function nextQuestion() {
+                state.currentQuestionIndex++;
+                if(state.currentQuestionIndex < CONFIG.totalQuestions) {
+                    showCurrentQuestion();
+                } else {
+                    submitQuiz();
+                }
+            }
+
+            function submitQuiz() {
+                clearInterval(state.countdownTimer);
+                
+                // 计算得分
+                let correctCount = 0;
+                const wrongDetails = [];
+                state.selectedQuestions.forEach((q, index) => {
+                    if(state.userAnswers[index] === q.correct) {
+                        correctCount++;
+                    } else {
+                        wrongDetails.push({
+                            ...q,
+                            number: index + 1,
+                            userAnswer: state.userAnswers[index]
+                        });
+                    }
+                });
+
+                // 显示结果
+                elements.quizScreen.style.display = 'none';
+                elements.resultScreen.style.display = 'block';
+                elements.finalResult.innerHTML = `
+                    <h2 style="color:#2196F3; text-align: center;">考生姓名：${state.userName}</h2>
+                    <div class="score" style="text-align: center;">得分：${correctCount * CONFIG.scorePerQuestion}分</div>
+                    <h3 style="text-align: center;">正确：${correctCount}题 / 总计：${CONFIG.totalQuestions}题</h3>
+                    ${wrongDetails.length ? `
+                        <div class="result-container">
+                            <h4>错题解析（共${wrongDetails.length}题）：</h4>
+                            ${wrongDetails.map(item => `
+                                <div class="wrong-question">
+                                    <p>第${item.number}题：${item.question}</p>
+                                    <div class="options">
+                                        ${item.options.map(opt => `
+                                            <div class="${opt[0] === item.correct ? 'correct-answer' : 
+                                                         opt[0] === item.userAnswer ? 'wrong-answer' : ''}">
+                                                ${opt}
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div><hr>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                `;
+                window.scrollTo(0, 0);
+            }
+
+            init();
+        })();
     </script>
 </body>
 </html>
